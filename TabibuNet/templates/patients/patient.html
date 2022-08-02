@@ -1,0 +1,35 @@
+{% extends "tour/main.html" %}
+{% block title %}
+{% if object %}
+Edit Property "{{ object.first_name }}"
+{% else %}
+Create a new course
+{% endif %}
+{% endblock %}
+{% block content %}
+<h1 style="text-align: center">
+{% if object %}
+Edit Patient "{{ object.first_name }}"
+{% else %}
+Add new Patient
+{% endif %}
+</h1>
+<div class="module">
+
+<form action="." method="post" enctype="multipart/form-data">
+    <div class="grid-container">
+        <h2>Patient  info</h2>
+      <table style="background-color: grey">
+{{ form.as_table }}
+      </table>
+          <button type="submit" class="primary button expanded search-button">
+      Save Patient
+    </button>
+
+
+    </div>
+{% csrf_token %}
+
+</form>
+</div>
+{% endblock %}

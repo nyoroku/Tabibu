@@ -1,0 +1,107 @@
+{% extends 'tour/main.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Waiting for Pharmacy
+    {% endblock %}
+{% block body_block %}
+
+{% block content %}
+<h5 class="center" style=" margin-top: 1.5%; margin-bottom: 0.001%; font-family: 'Oswald',Bold; font-size: 40px; text-align: center; color: darkred">Waiting For Pharmacy</h5>
+{% if prescriptions %}
+   <h5>{{ total_prescriptions }} Prescription{{ total_prescriptions|pluralize }}</h5>
+<table>
+<thead>
+<tr style="font-family: Oswald, bold; color: darkblue">
+    <th width="20">Prescription Id</th>
+
+    <th width="50">Patient</th>
+
+
+
+    <th width="50">Status</th>
+    <th width="100"> Actions</th>
+
+
+</tr>
+
+</thead>
+<tbody>
+{% for prescription in prescriptions %}
+<tr>
+    <td width="10"> {{ prescription.id|stringformat:"03d" }}</td>
+
+<td>{{ prescription.visit.patient.first_name|capfirst }} {{ prescription.visit.patient.last_name|capfirst }}</td>
+
+
+{% if prescription.status == 1 %}
+<td width="100">Undelivered</td>
+    {% elif prescription.status == 2 %}
+    <td width="100">Delivered</td>
+
+    {% else %}
+    <td width="100">Out Of Range</td>
+    {% endif %}
+
+
+
+
+
+<td> <p style="font-family: Merriweather, serif; font-weight: bold; font-size: 18px; color: red; text-align: justify">
+<a href="{% url 'TabibuNet:pharmacy' prescription.id %}">Start Attending<i class="fa fa-edit " style="color:#002C3E" aria-hidden="true"></i></a>
+</p>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+{% else %}
+<h5 style="text-align: center">No one in line</h5>
+{% endif %}
+
+
+
+     {% if prescriptions.has_other_pages %}
+    <ul class="pagination-pointed pagination text-center" role="navigation" aria-label="Pagination">
+    {% if prescriptions.has_previous %}
+        <li class="pagination-previous"><a class="pagination-pointed-button" href="?page={{ prescriptions.previous_page_number }}" >Previous <span class="show-for-sr">Page</span></a></li>
+        {% else %}
+  <li class="pagination-previous disabled">Previous <span class="show-for-sr">Page</span></li>
+        {% endif %}
+    {% for i in  prescriptions.paginator.page_range %}
+    {% if prescriptions.number == i %}
+  <li class="current"><span class="show-for-sr">You're on page</span> {{ i }}</li>
+        {% else %}
+  <li><a class="pagination-pointed-button" href="?page={{ i }}" aria-label="Page 2">{{ i }}</a></li>
+  {% endif %}
+    {% endfor %}
+    {% if prescriptions.has_next %}
+  <li class="pagination-next"><a class="pagination-pointed-button" href="?page={{ prescriptions.next_page_number }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+        {% endif %}
+</ul>
+    {% endif %}
+
+    {% if tag.name in tag %}
+        {% if object_list.has_other_pages %}
+    <ul class="pagination-pointed pagination text-center" role="navigation" aria-label="Pagination">
+    {% if object_list.has_previous %}
+        <li class="pagination-previous"><a class="pagination-pointed-button" href="?page={{ object_list.previous_page_number }}" >Previous <span class="show-for-sr">Page</span></a></li>
+        {% else %}
+  <li class="pagination-previous disabled">Previous <span class="show-for-sr">Page</span></li>
+        {% endif %}
+    {% for i in  object_list.paginator.page_range %}
+    {% if object_list.number == i %}
+  <li class="current"><span class="show-for-sr">You're on page</span> {{ i }}</li>
+        {% else %}
+  <li><a class="pagination-pointed-button" href="?page={{ i }}" aria-label="Page 2">{{ i }}</a></li>
+  {% endif %}
+    {% endfor %}
+    {% if object_list.has_next %}
+  <li class="pagination-next"><a class="pagination-pointed-button" href="?page={{ object_list.next_page_number }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+        {% endif %}
+</ul>
+    {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% endblock %}

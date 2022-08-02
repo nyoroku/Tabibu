@@ -1,0 +1,10 @@
+{% extends 'tour/main.html' %}
+{% load staticfiles %}
+{% block title_block %}
+ Thank you for applying
+ {% endblock %}
+{% block content %}
+    <h5 class="center">Thank you {{ registration.firstname }} {{ registration.lastname }}</h5>
+<p class="center">Your registration has been successfully completed
+</p>
+{% endblock %}

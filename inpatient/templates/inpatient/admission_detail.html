@@ -1,0 +1,134 @@
+{% extends "tour/main.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+
+<div class="grid-container">
+<h1 style="text-align: center; font-family: Oswald, bold; color: darkred; font-weight: bold">{{ admission.patient.first_name }}'s Admission</h1>
+    {% if admission %}
+   <table id="vertical">
+
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Actions</th>
+           <td><h5 class="author-title"><a href="{% url 'inpatient:add_test' admission.id %}"> <button type="button" class="button hollow topbar-responsive-button">
+               Update Medical Test <i class="fa fa-edit-circle " style="color:#002C3E" aria-hidden="true"></i></button></a> <a href="{% url 'inpatient:add_obs' admission.id%}"> <button type="button" class="button hollow topbar-responsive-button">
+               Update Gyn/Obs Test <i class="fa fa-pencil-square " style="color:#002C3E" aria-hidden="true"></i></button></a><a href="{% url 'inpatient:medication_update' admission.id%}"> <button type="button" class="button hollow topbar-responsive-button">
+           Update Prescription <i class="fa fa-edit-pen " style="color:#002C3E" aria-hidden="true"></i></button></a></h5></td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Admission Date</th>
+           <td>{{ admission.admission_date }}</td>
+       </tr>
+
+       <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Patient</th>
+           <td>{{ admission.patient.first_name|capfirst }} {{ admission.patient.last_name|capfirst }}</td>
+       </tr>
+
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Reason For Admission</th>
+           <td>{{ admission.reason }}</td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Status</th>
+           <td><p>{{ admission.status|capfirst }} <a href="{% url 'inpatient:edit_admission' admission.id %}">
+           Update Status <i class="fa fa-pencil-square-o " style="color:#002C3E" aria-hidden="true"></i></a> </p></td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Discharge Time</th>
+           <td>{{ admission.discharge_date }}</td>
+       </tr>
+
+   </table>
+
+
+
+
+    {% endif %}
+</div>
+
+     {% if tests %}
+    <section >
+    <div class="grid-container">
+     <h1 style="text-align: center; font-family: Oswald, bold; color: darkred; font-weight: bold">{{ admission.patient.first_name|capfirst }}'s Medical Tests</h1>
+
+   <h5>{{ tests.count }} Test{{ tests|pluralize }}</h5>
+<table>
+<thead>
+<tr style="font-family: Oswald, bold; color: darkblue">
+    <th width="100">Test Id</th>
+    <th width="50">Test Name</th>
+</tr>
+</thead>
+<tbody>
+{% for test in tests %}
+<tr>
+    <td width="100"><a href="{{ test.get_absolute_url }}">{{ test.id|stringformat:"03d" }}</a></td>
+<td>{{ test.name }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+    </div>
+</section>
+    {% endif %}
+         {% if obs %}
+    <section>
+    <div class="grid-container">
+     <h1 style="text-align: center; font-family: Oswald, bold; color: darkred; font-weight: bold">{{ admission.patient.first_name|capfirst }}'s Obstetrics/Gynaecology Tests</h1>
+
+   <h5>{{ obs.count }} Test{{ obs|pluralize }}</h5>
+<table>
+<thead>
+<tr style="font-family: Oswald, bold; color: darkblue">
+    <th width="100">Test Id</th>
+    <th width="50">Test Name</th>
+</tr>
+
+</thead>
+<tbody>
+{% for ob in obs %}
+<tr>
+    <td width="100"><a href="{{ ob.get_absolute_url }}">{{ ob.id|stringformat:"03d" }}</a></td>
+<td>{{ ob.name }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+    </div>
+</section>
+    {% endif %}
+{% if prescriptions %}
+    <section>
+    <div class="grid-container">
+    <h5 class="center" style=" margin-top: 1.5%; margin-bottom: 0.001%; font-family: 'Oswald',Bold; font-size: 40px; text-align: center; color: darkred">{{ admission.patient.first_name }}'s Prescription</h5>
+
+   <h5>{{ prescriptions.count }} Prescription{{ prescriptions|pluralize }}</h5>
+<table>
+<thead>
+<tr style="font-family: Oswald, bold; color: darkblue">
+    <th width="100">Medication</th>
+    <th width="50">Strength</th>
+    <th width="50">Instructions</th>
+    <th width="50">Refill</th>
+    <th width="50">Active</th>
+</tr>
+</thead>
+<tbody>
+{% for prescription in prescriptions %}
+<tr>
+  <td width="100">{{ prescription.medication }}</td>
+<td>{{ prescription.strength }}</td>
+<td>{{ prescription.instruction }}</td>
+<td>{{ prescription.refill }}</td>
+<td>{{ prescription.active }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+    </div>
+</section>
+
+{% endif %}
+
+{% endblock %}
+

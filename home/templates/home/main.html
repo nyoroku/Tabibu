@@ -1,0 +1,390 @@
+{%load i18n staticfiles %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="utf-8">
+    <meta name="Description" CONTENT="Location: Kerugoya ,Along Kerugoya Nyeri Highway, Category: College, Levels:  Diploma Certificate">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+     <title>
+ Travel ||
+ {% block title_block %}
+ Enjoy
+ {% endblock %}
+ </title>
+
+    <meta name="robots" content="noindex,nofollow">
+
+<link href="https://fonts.googleapis.com/icon?family=Material+ylesheet">Icons" rel="st
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Chela+One|Coda+Caption:800|Fira+Sans|Gaegu|Hind|Knewave|Lato|Libre+Baskerville|Lora|Markazi+Text|Merienda|Merriweather|Montserrat|Noto+Sans|Noto+Serif|Open+Sans|Open+Sans+Condensed:300|Oswald|PT+Sans|PT+Sans+Narrow|Playfair+Display|Poppins|Raleway|Roboto|Roboto+Condensed|Roboto+Slab|Rubik|Slabo+27px|Source+Sans+Pro|Ubuntu" rel="stylesheet">
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static "home/css/materialize.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/style.css' %}" />
+{% endblock %}
+</head>
+<body>
+<nav class="light-blue darken-1 " style="left: 10%" role="navigation">
+
+    <div class="nav-wrapper container " style="right:5%;font-family:'Playfair Display', serif;  font-size: 50px"><a id="logo-container" href="{% url 'index'%}" class="brand-logo white-text">KAITHERI</a>
+
+      <ul class="blue-grey-text right hide-on-med-and-down" style="position: absolute;  z-index: 100;height: 100%; width:100%; left:52%; opacity: 2.0;">
+
+
+          <li><a class="white-text" href="{% url 'college:aboutus'%}">About Us</a></li>
+                     <li class="nav-item btn-group">
+
+        <a class='dropdown-trigger white-text' href='{% url 'college:courses'%}' data-target='dropdown1'>Courses<i class="material-icons right">arrow_drop_down</i></a>
+
+
+                         <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content blue darken-2'>
+                   <li><a class="cyan-text" href="{% url 'college:homeeconomics'%}">Home Economics Department</a></li>
+    <li><a class="cyan-text" href="{% url 'college:engineering'%}">Engineering Department</a></li>
+      <li><a class="cyan-text" href="{% url 'college:building' %}">Building And Construction Department</a></li>
+
+  </ul>
+                     </li>
+<li class="nav-item btn-group">
+
+      <a class='dropdown-trigger white-text' href='#' data-target='dropdown3'>Examinations<i class="material-icons right">arrow_drop_down</i></a>
+  <!-- Dropdown Structure -->
+  <ul id='dropdown3' class='dropdown-content red darken-2'>
+          <li><a class="cyan-text" href="{% url 'college:exams'%}">Kasneb</a></li>
+    <li><a class="cyan-text" href="{% url 'college:csk'%}">Computer Society of Kenya(CSK)</a></li>
+      <li><a class="cyan-text" href="{% url 'college:knec' %}">Knec</a></li>
+      <li><a class="cyan-text" href="{% url 'college:abe' %}">Abe</a></li>
+      <li><a class="cyan-text" href="{% url 'college:icm' %}">Icm</a></li>
+      <li><a class="cyan-text" href="{% url 'college:icdl' %}">Icdl</a></li>
+      <li><a class="cyan-text" href="{% url 'college:internal' %}">Internal/Collaboration</a></li>
+
+  </ul>
+                     </li>
+          <li><a class="white-text" href="{% url 'college:consultancy'%}">Career Guide</a></li>
+          <li><a class="white-text" href="{% url 'college:vacancies'%}">Job Opportunities </a></li>
+           <li><a class="white-text" href="{% url 'events:blog'%}">Blog</a></li>
+          <li><a class="white-text" href="{% url 'student:resources'%}">Downloads</a></li>
+      </ul>
+        <ul id="nav-mobile" class="right sidenav blue" style="">
+         <li style="margin-bottom: 5%; background-color: dodgerblue;"><a href="{% url 'index' %}" class="orange-text">Kaitheri Polytechnic</a></li>
+
+          <li><a class="orange-text accent-4" href="{% url 'college:aboutus'%}">About Us</a></li>
+             <li class="no-padding">
+          <ul class="collapsible collapsible-accordion">
+           <li class="bold"><a class="collapsible-header  waves-effect waves-teal orange-text" style="left:19px;">Courses<i class="material-icons right white-text">arrow_drop_down</i></a>
+              <div class="collapsible-body">
+                <ul class="red darken-2">
+                     <li><a class="cyan-text" href="{% url 'college:homeeconomics'%}">Home Economics Department</a></li>
+    <li><a class="cyan-text" href="{% url 'college:engineering'%}">Engineering Department</a></li>
+      <li><a class="cyan-text" href="{% url 'college:building' %}">Building And Construction Department</a></li>
+
+                </ul>
+              </div>
+            </li>
+          </ul>
+           </li>
+
+
+                 <li class="no-padding">
+          <ul class="collapsible collapsible-accordion">
+           <li class="bold"><a class="collapsible-header  waves-effect waves-teal orange-text" style="left:19px;">Examinations<i class="material-icons right white-text">arrow_drop_down</i></a>
+              <div class="collapsible-body">
+                <ul class="red darken-2">
+
+        <li><a class="cyan-text" href="{% url 'college:exams'%}">Kasneb</a></li>
+    <li><a class="cyan-text" href="{% url 'college:csk'%}">Computer Society of Kenya(CSK)</a></li>
+      <li><a class="cyan-text" href="{% url 'college:knec' %}">Knec</a></li>
+      <li><a class="cyan-text" href="{%url 'college:abe' %}">Abe</a></li>
+      <li><a class="cyan-text" href="{% url 'college:icm' %}">Icm</a></li>
+      <li><a class="cyan-text" href="{% url 'college:icdl' %}">Icdl</a></li>
+      <li><a class="cyan-text" href="{% url 'college:internal' %}">Internal/Collaboration</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+         </li>
+          <li><a class="orange-text accent-4" href="{% url 'college:consultancy'%}">Career Guide</a></li>
+          <li><a class="orange-text accent-4" href="{% url 'college:vacancies'%}">Job Opportunities </a></li>
+           <li><a class="white-text" href="{% url 'events:blog'%}">Blog</a></li>
+            <li><a class="white-text" href="{% url 'student:resources'%}">Downloads</a></li>
+      </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger deep-orange-text" style="left:10%;"><i class="material-icons big">menu</i></a>
+
+
+
+    </div>
+  </nav>
+{% load display_tags %}
+{% get_latest_displays%}
+
+       <div class="slider col-sm-12" style="margin-top: 0">
+     <ul class="slides">
+ {% for display in latest_displays %}
+      <li>
+          {% if display.photo %}
+                                  <img src="{{ display.photo.url }}" alt="" class="square responsive-img">
+                   {% endif %}
+        <div class="caption center-align">
+          <h3 class="center-align blue-text darken-4" style="font-family: 'Playfair Display', Regular ; font-size: 50px">{{ display.title }}</h3>
+          <h5 class="center-align red-text darken-4" style="font-family: 'Playfair Display', Regular ; font-size: 35px">{{ display.body }}</h5>
+        </div>
+      </li>
+         {% endfor %}
+     </ul>
+       </div>
+<br>
+
+
+
+
+
+    <div class="section light-blue darken-4">
+        <div class="container">
+
+      <div class="row">
+        <div class="col 12  center">
+          <h3><i class="mdi-content-send brown-text"></i></h3>
+          <h4 class="red-text left-align" style="font-family: 'Playfair Display', Bold; font-size: 40px">AT KAITHERI</h4>
+            <h4 class="orange-text left-align" style="font-family: 'Playfair Display', Bold Italic; font-size: 25px">WE SHINE IN TECHNOLOGY</h4>
+          <p class="left-align white-text darken-4" style="font-family: 'Playfair Display', Regular ; font-size: 20px">
+ We train and prepare our student for the future, we impact them with modern day skills to help them work and contribute positively to the society.We are always on self improving journey since everythimg is a learning curve </p>
+                    <a href="{% url 'events:apply' %}" id="download-button" class="btn-large waves-effect red darken-4 left-align" style="font-family: 'Coda Caption',Regular;">APPLY ONLINE<i class="fa fa-arrow-right" style="font-size:15px"></i></a>
+        </div>
+      </div>
+
+
+        </div>
+
+
+ <div class="divider-after white darken-4 cyan-text lighten-1">
+
+  </div>
+<div class="section white">
+<h5 class="center" style=" margin-top: 1.5%; margin-bottom: 0.001%; font-family: 'Oswald',Bold; font-size: 40px">KAITHERI NEWS</h5>
+{% block news %}
+  {% endblock %}
+<a href="{% url 'home:allnews' %}" id="download-button" class="btn-large waves-effect waves-light teal lighten-1" style="left:1300px">Read All News<i class="fa fa-arrow-right" style="font-size:15px"></i></a>
+</div>
+
+
+
+
+      <!--   Icon Section   -->
+
+
+
+     {% load events_tags %}
+
+    {% get_latest_events %}
+<div class="section grey lighten-1">
+<div class="container">
+          <h5 class="center" style=" margin-top: 1.5%; margin-bottom: 0.001%; font-family: 'Oswald',Bold; font-size: 40px">KAITHERI EVENTS</h5>
+
+      {% for happen in latest_events %}
+<div class="col s12 m4 offset-m4 l6 offset-l3">
+
+        <div class="card-panel white lighten-5 z-depth-1">
+          <div class="row valign-wrapper">
+            <div class="col s6">
+              {% if happen.photo %}
+                                  <img src="{{ happen.photo.url }}" alt="" class="square responsive-img">
+                   {% endif %} <!-- notice the "circle" class -->
+            </div>
+            <div class="col s12">
+                <h5 class="center" style=" margin-top: 1.5%; margin-bottom: 0.001%; font-family: 'Oswald',Bold; font-size: 40px">{{ happen.title }}</h5>
+
+                 <p class="center brown-text" style="font-family: 'Oswald',Bold; font-size: 30px "><i class="fa fa-calendar" style="font-size:50px; color: blue"></i>{{ happen.day }}</p>
+        <p class="center brown-text" style="font-family: 'Oswald',Bold; font-size: 25px "><i class="fa fa-clock-o" style="font-size:40px"></i>{{ happen.start }}-{{ happen.end }}</p>
+
+                    <span class="light black-text center" style="font-family: 'Playfair Display', Regular ; font-size: 17px">{{ happen.body|truncatewords:40 }}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+{% endfor %}
+</div>
+<a href="{% url 'events:allevents' %}" id="download-button" class="btn-large waves-effect waves-light teal lighten-1" style="left:1300px">Check All Events<i class="fa fa-arrow-right" style="font-size:15px"></i></a>
+</div>
+
+{% load testi_tags %}
+   {% get_latest_testimonials %}
+<div class="section white">
+<h5 class="center" style=" margin-top: 1.5%; margin-bottom: 0.001%; font-family: 'Oswald',Bold; font-size: 40px">TESTIMONIALS</h5>
+
+    <div class="carousel carousel-slider center">
+
+        {% for testi in latest_testimonials %}
+
+    <div class="carousel-item center grey lighten-1 black-text" href="#one!">
+    <div class="col s2">
+              {% if testi.photo %}
+                                  <img src="{{ testi.photo.url }}" alt="" class="round responsive-img">
+                   {% endif %} <!-- notice the "circle" class -->
+            </div>
+      <h2>{{ testi.title }}</h2>
+     <p class="center blue-text darken-4" style="font-family: 'Playfair Display', Regular ; font-size: 20px">{{ testi.body }}</p>
+    <p class="center blue-text darken-4" style="font-family: 'Playfair Display', Regular ; font-size: 20px">{{ testi.person }}-{{ testi.course }}</p>
+    </div>
+        {% endfor %}
+    </div>
+</div>
+        <footer class="page-footer light-blue darken-4">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+
+            <i class="fa fa-map-marker" style="font-size:48px;color:red"></i>
+            <h5 class="white-text">OUR LOCATION</h5>
+          <p class="grey-text text-lighten-4">We are located in Kerugoya Town</p>
+
+
+        </div>
+           <div class="col l3 s12">
+          <h5 class="white-text">Contact Us</h5>
+          <ul>
+             <li class="white-text"><p>0721606888, 0714410151, 0773515224 <i class="material-icons   left">phone</i></p></li>
+              <br>
+
+              <li class="white-text"><p>612 Kerugoya<i class="material-icons  left">mail</i></p></li>
+              <li class="white-text"><p>info@katheripoly.ac.ke<i class="material-icons  left">email</i></p></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Important Links</h5>
+          <ul>
+             <li><a class="white-text" href="{% url 'admin:index' %}">Staff Login</a></li>
+            <li><a class="white-text" href="{% url 'student:resources'%}">Students' Resources</a></li>
+            <li><a class="white-text" href="#!">Sitemap</a></li>
+
+          </ul>
+        </div>
+
+        <div class="col 13 s12">
+            <div class="row">
+          <h5 class="white-text">Connect With Us</h5>
+
+          <ul>
+
+              <li><a href="https://www.facebook.com/apexmwea01"><i class="fa fa-facebook-square" style="font-size:36px; color: red"></i></a></li>
+              <li><a href="http://www.twitter.com/MweaApexCollege"><i class="fa fa-twitter-square" style="font-size:36px; color: red"></i></a></li>
+               <li><a href="https://www.facebook.com/apexmwea01"><i class="fa fa-youtube-square" style="font-size:36px; color: red"></i></a></li>
+
+
+
+
+
+
+          </ul>
+
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Copyright @ <a class="deep-orange-text" href="{% url 'index' %}">Kaitheri Polytechnic 2018</a>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="{% static 'home/js/jquery-3.2.1.js' %}"></script>
+  <script src="{% static 'home/js/materialize.js' %}"></script>
+  <script src="{% static 'home/js/init.js' %}"></script>
+
+<script>
+            $(document).ready(function () {
+                $('.slider').slider({full_width: true,
+                indicators:false});
+            });
+        </script>
+<script>
+    $('.dropdown-trigger').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: false, // Does not change width of dropdown to that of the activator
+      hover: true, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: true, // Displays dropdown below the button
+      alignment: 'left', // Displays dropdown with edge aligned to the left of button
+      stopPropagation: false, // Stops event propagation
+      coverTrigger: false
+    });
+</script>
+  <script>
+
+    $(".button-collapse").sideNav(
+        {menuWidth:,
+        CloseOnClick: true,
+        edge: 'right'
+        }
+    );
+    $('.collapsible').collapsible()
+        </script>
+  <script>
+      $(".dropdown-button").dropdown();
+  </script>
+<script>
+    $(document).ready('.dropdown-button').dropdown('open');
+
+</script>
+<script>
+     $(document).ready('.dropdown-button').dropdown('close');
+</script>
+<script>
+     $('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: false, // Does not change width of dropdown to that of the activator
+      hover: true, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: true, // Displays dropdown below the button
+      alignment: 'left', // Displays dropdown with edge aligned to the left of button
+      stopPropagation: false // Stops event propagation
+    }
+  );
+</script>
+
+<script>
+    $( document ).ready(function(){})
+</script>
+<script>
+      $(".button-collapse").sideNav();
+</script>
+  <script>
+     $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+</script>
+<script>
+     $('.collapsible').collapsible({
+    accordion: false, // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+   // onOpen: function(el) { alert('Open'); }, // Callback for Collapsible open
+   // onClose: function(el) { alert('Closed'); } // Callback for Collapsible close
+  });
+</script>
+
+  <script>
+       $(document).ready(function(){
+    $('.carousel').carousel({
+         full_width: false,
+        indicators : true
+
+
+    });
+     });
+  </script>
+  <script>
+ $('.carousel-slider').slider({
+
+  });
+  </script>
+
+    </div>
+
+
+  </body>
+</html>

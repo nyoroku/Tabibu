@@ -1,0 +1,91 @@
+{% extends 'tour/main.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Admission list
+    {% endblock %}
+{% block body_block %}
+
+{% block content %}
+<h5 class="center" style=" margin-top: 1.5%; margin-bottom: 0.001%; font-family: 'Oswald',Bold; font-size: 40px; text-align: center; color: darkred">Admission List</h5>
+{% if object_list %}
+   <h5>{{ object_list.count }} Admission{{ object_list|pluralize }}</h5>
+<table>
+<thead>
+<tr style="font-family: Oswald, bold; color: darkblue">
+    <th width="20">Admission Id</th>
+    <th width="50">Patient</th>
+    <th width="50">Admission Date</th>
+    <th width="50">Discharge Date</th>
+
+    <th width="50">Status</th>
+
+
+</tr>
+
+</thead>
+<tbody>
+{% for admission in object_list %}
+<tr>
+    <td width="10"><a href="{{ admission.get_absolute_url }}" > {{ admission.id|stringformat:"03d" }}</a></td>
+<td>{{ admission.patient.first_name|capfirst }} {{ visit.patient.last_name|capfirst }}</td>
+<td>{{ admission.admission_date }}</td>
+<td>{{ admission.discharge_date}}</td>
+
+<td width="100">{{  admission.status|capfirst }}</td>
+
+
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+{% else %}
+<h5 style="text-align: center">Add Admission</h5>
+{% endif %}
+
+
+
+     {% if page_obj.has_other_pages %}
+    <ul class="pagination-pointed pagination text-center" role="navigation" aria-label="Pagination">
+    {% if page_obj.has_previous %}
+        <li class="pagination-previous"><a class="pagination-pointed-button" href="?page={{ page_obj.previous_page_number }}" >Previous <span class="show-for-sr">Page</span></a></li>
+        {% else %}
+  <li class="pagination-previous disabled">Previous <span class="show-for-sr">Page</span></li>
+        {% endif %}
+    {% for i in  page_obj.paginator.page_range %}
+    {% if page_obj.number == i %}
+  <li class="current"><span class="show-for-sr">You're on page</span> {{ i }}</li>
+        {% else %}
+  <li><a class="pagination-pointed-button" href="?page={{ i }}" aria-label="Page 2">{{ i }}</a></li>
+  {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+  <li class="pagination-next"><a class="pagination-pointed-button" href="?page={{ page_obj.next_page_number }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+        {% endif %}
+</ul>
+    {% endif %}
+
+    {% if tag.name in tag %}
+        {% if object_list.has_other_pages %}
+    <ul class="pagination-pointed pagination text-center" role="navigation" aria-label="Pagination">
+    {% if object_list.has_previous %}
+        <li class="pagination-previous"><a class="pagination-pointed-button" href="?page={{ object_list.previous_page_number }}" >Previous <span class="show-for-sr">Page</span></a></li>
+        {% else %}
+  <li class="pagination-previous disabled">Previous <span class="show-for-sr">Page</span></li>
+        {% endif %}
+    {% for i in  object_list.paginator.page_range %}
+    {% if object_list.number == i %}
+  <li class="current"><span class="show-for-sr">You're on page</span> {{ i }}</li>
+        {% else %}
+  <li><a class="pagination-pointed-button" href="?page={{ i }}" aria-label="Page 2">{{ i }}</a></li>
+  {% endif %}
+    {% endfor %}
+    {% if object_list.has_next %}
+  <li class="pagination-next"><a class="pagination-pointed-button" href="?page={{ object_list.next_page_number }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+        {% endif %}
+</ul>
+    {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% endblock %}

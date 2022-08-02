@@ -1,0 +1,12 @@
+{% extends 'tour/main.html' %}
+{% load staticfiles %}
+{% block title_block %}
+ Send to Lab
+ {% endblock %}
+{% block content %}
+    <h5 class="author-title"><a href="{% url 'TabibuNet:visit_list' %}"> <button type="button" class="button hollow alert topbar-responsive-button">
+     <i class="fa fa-arrow-left " style="color:#002C3E" aria-hidden="true"></i>Back to reception</button></a></h5>
+    <h5 class="center"> {{ visit.patient.first_name }} {{ visit.patient.last_name }}</h5>
+<p class="center"> is waiting for lab
+</p>
+{% endblock %}

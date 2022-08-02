@@ -1,0 +1,301 @@
+{%load i18n staticfiles %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Chela+One|Coda+Caption:800|Fira+Sans|Gaegu|Hind|Knewave|Lato|Libre+Baskerville|Lora|Markazi+Text|Merienda|Merriweather|Montserrat|Noto+Sans|Noto+Serif|Open+Sans|Open+Sans+Condensed:300|Oswald|PT+Sans|PT+Sans+Narrow|Playfair+Display|Poppins|Raleway|Roboto|Roboto+Condensed|Roboto+Slab|Rubik|Slabo+27px|Source+Sans+Pro|Ubuntu" rel="stylesheet">
+  <title>
+ KAITHERI POLYTECHNIC ||
+ {% block title_block %}
+ SHINE IN TECHNOLOGY
+ {% endblock %}
+ </title>
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static "home/css/materialize.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/style.css' %}" />
+{% endblock %}
+
+
+
+</head>
+<body>
+<nav class="light-blue darken-1 " style="left: 10%" role="navigation">
+
+    <div class="nav-wrapper container " style="right:5%;/*/*// "><a id="logo-container" href="{% url 'index'%}" class="brand-logo white-text">KAITHERI</a>
+
+      <ul class="blue-grey-text right hide-on-med-and-down" style="position: absolute;  z-index: 100;height: 100%; width:100%; left:52%; opacity: 2.0;">
+
+
+          <li><a class="white-text" href="{% url 'college:aboutus'%}">About Us</a></li>
+                     <li class="nav-item btn-group">
+
+        <a class='dropdown-trigger white-text' href='#' data-target='dropdown1'>Courses<i class="material-icons right">arrow_drop_down</i></a>
+
+
+                         <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content blue darken-2'>
+                     <li><a class="cyan-text" href="{% url 'college:homeeconomics'%}">Home Economics Department</a></li>
+    <li><a class="cyan-text" href="{% url 'college:engineering'%}">Engineering Department</a></li>
+      <li><a class="cyan-text" href="{% url 'college:building' %}">Building And Construction Department</a></li>
+  </ul>
+                     </li>
+<li class="nav-item btn-group">
+
+      <a class='dropdown-trigger white-text' href='#' data-target='dropdown3'>Examinations<i class="material-icons right">arrow_drop_down</i></a>
+  <!-- Dropdown Structure -->
+  <ul id='dropdown3' class='dropdown-content red darken-2'>
+          <li><a class="cyan-text" href="{% url 'college:exams'%}">Kasneb</a></li>
+    <li><a class="cyan-text" href="{% url 'college:csk'%}">Computer Society of Kenya(CSK)</a></li>
+      <li><a class="cyan-text" href="{% url 'college:knec' %}">Knec</a></li>
+      <li><a class="cyan-text" href="{% url 'college:abe' %}">Abe</a></li>
+      <li><a class="cyan-text" href="{% url 'college:icm' %}">Icm</a></li>
+      <li><a class="cyan-text" href="{% url 'college:icdl' %}">Icdl</a></li>
+      <li><a class="cyan-text" href="{% url 'college:internal' %}">Internal/Collaboration</a></li>
+
+  </ul>
+                     </li>
+          <li><a class="white-text" href="{% url 'college:consultancy'%}">Career Guide</a></li>
+          <li><a class="white-text" href="{% url 'college:vacancies'%}">Job Opportunities </a></li>
+           <li><a class="white-text" href="{% url 'events:blog'%}">Blog</a></li>
+           <li><a class="white-text" href="{% url 'student:resources'%}">Downloads</a></li>
+      </ul>
+        <ul id="nav-mobile" class="right sidenav blue" style="">
+         <li style="margin-bottom: 5%; background-color: dodgerblue;"><a href="{% url 'index' %}" class="orange-text">Achievers College</a></li>
+
+          <li><a class="orange-text accent-4" href="{% url 'college:aboutus'%}">About Us</a></li>
+             <li class="no-padding">
+          <ul class="collapsible collapsible-accordion">
+           <li class="bold"><a class="collapsible-header  waves-effect waves-teal orange-text" style="left:19px;">Courses<i class="material-icons right white-text">arrow_drop_down</i></a>
+              <div class="collapsible-body">
+                <ul class="red darken-2">
+               <li><a class="cyan-text" href="{% url 'college:homeeconomics'%}">Home Economics Department</a></li>
+    <li><a class="cyan-text" href="{% url 'college:engineering'%}">Engineering Department</a></li>
+      <li><a class="cyan-text" href="{% url 'college:building' %}">Building And Construction Department</a></li>
+
+                </ul>
+              </div>
+            </li>
+          </ul>
+           </li>
+
+
+                 <li class="no-padding">
+          <ul class="collapsible collapsible-accordion">
+           <li class="bold"><a class="collapsible-header  waves-effect waves-teal orange-text" style="left:19px;">Examinations<i class="material-icons right white-text">arrow_drop_down</i></a>
+              <div class="collapsible-body">
+                <ul class="red darken-2">
+
+        <li><a class="cyan-text" href="{% url 'college:exams'%}">Kasneb</a></li>
+    <li><a class="cyan-text" href="{% url 'college:csk'%}">Computer Society of Kenya(CSK)</a></li>
+      <li><a class="cyan-text" href="{% url 'college:knec' %}">Knec</a></li>
+      <li><a class="cyan-text" href="{%url 'college:abe' %}">Abe</a></li>
+      <li><a class="cyan-text" href="{% url 'college:icm' %}">Icm</a></li>
+      <li><a class="cyan-text" href="{% url 'college:icdl' %}">Icdl</a></li>
+      <li><a class="cyan-text" href="{% url 'college:internal' %}">Internal/Collaboration</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+         </li>
+          <li><a class="orange-text accent-4" href="{% url 'college:consultancy'%}">Career Guide</a></li>
+          <li><a class="orange-text accent-4" href="{% url 'college:vacancies'%}">Job Opportunities </a></li>
+           <li><a class="orange-text accent-4" href="{% url 'events:blog'%}">Blog</a></li>
+             <li><a class="white-text" href="{% url 'student:resources'%}">Downloads</a></li>
+      </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger deep-orange-text" style="left:10%;"><i class="material-icons big">menu</i></a>
+
+
+
+    </div>
+  </nav>
+
+
+
+
+  <div>
+  {% block body_block %}
+  {% endblock %}
+  </div>
+
+
+        <footer class="page-footer black darken-1">
+    <div class="container">
+
+      <div class="row">
+        <div class="col l6 s12">
+
+            <i class="fa fa-map-marker" style="font-size:48px;color:red"></i>
+            <h5 class="white-text">OUR LOCATION</h5>
+          <p class="grey-text text-lighten-4">We are located in Embu,Mama Ngina Street, at Subira House</p>
+
+
+        </div>
+           <div class="col l3 s12">
+          <h5 class="white-text">Contact Us</h5>
+          <ul>
+             <li class="white-text"><p>0721606888, 0714410151, 0773515224 <i class="material-icons   left">phone</i></p></li>
+              <br>
+
+              <li class="white-text"><p>612 Embu<i class="material-icons  left">mail</i></p></li>
+              <li class="white-text"><p>achieverscollege@yahoo.com<i class="material-icons  left">email</i></p></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Important Links</h5>
+          <ul>
+             <li><a class="white-text" href="{% url 'admin:index' %}">Staff Login</a></li>
+            <li><a class="white-text" href="{% url 'student:resources'%}">Students' Resources</a></li>
+            <li><a class="white-text" href="#!">Sitemap</a></li>
+
+          </ul>
+        </div>
+
+        <div class="col 13 s12">
+            <div class="row">
+          <h5 class="white-text">Connect With Us</h5>
+
+          <ul>
+
+              <li><a class="https://www.facebook.com/apexmwea01"><i class="fa fa-facebook-square" style="font-size:36px"></i></a></li>
+              <li><a class="http://www.twitter.com/MweaApexCollege"><i class="fa fa-twitter-square" style="font-size:36px"></i></a></li>
+              <li><a class="#"><img src="{% static "home/images/youtube.gif" %}" alt="" /></a></li>
+              <li><a class="#"><img src="{% static "home/images/flickr.gif" %}" alt="" /></a></li>
+
+
+
+
+          </ul>
+
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Copyright @ <a class="deep-orange-text" href="{% url 'index' %}">Kaitheri Polytechnic 2018</a>
+      </div>
+
+    </div>
+  </footer>
+
+
+   <!--  Scripts-->
+  <script src="{% static 'home/js/jquery-3.2.1.js' %}"></script>
+  <script src="{% static 'home/js/materialize.js' %}"></script>
+  <script src="{% static 'home/js/init.js' %}"></script>
+
+<script>
+            $(document).ready(function () {
+                $('.slider').slider({full_width: true,
+                indicators:false});
+            });
+        </script>
+<script>
+    $('.dropdown-trigger').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: false, // Does not change width of dropdown to that of the activator
+      hover: true, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: true, // Displays dropdown below the button
+      alignment: 'left', // Displays dropdown with edge aligned to the left of button
+      stopPropagation: false, // Stops event propagation
+      coverTrigger: false
+    });
+</script>
+  <script>
+
+    $(".button-collapse").sideNav(
+        {menuWidth:,
+        CloseOnClick: true,
+        edge: 'right'
+        }
+    );
+    $('.collapsible').collapsible()
+        </script>
+  <script>
+      $(".dropdown-button").dropdown();
+  </script>
+<script>
+    $(document).ready('.dropdown-button').dropdown('open');
+
+</script>
+<script>
+     $(document).ready('.dropdown-button').dropdown('close');
+</script>
+<script>
+     $('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: false, // Does not change width of dropdown to that of the activator
+      hover: true, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: true, // Displays dropdown below the button
+      alignment: 'left', // Displays dropdown with edge aligned to the left of button
+      stopPropagation: false // Stops event propagation
+    }
+  );
+</script>
+
+<script>
+    $( document ).ready(function(){})
+</script>
+<script>
+      $(".button-collapse").sideNav();
+</script>
+  <script>
+     $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+</script>
+<script>
+     $('.collapsible').collapsible({
+    accordion: false, // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+   // onOpen: function(el) { alert('Open'); }, // Callback for Collapsible open
+   // onClose: function(el) { alert('Closed'); } // Callback for Collapsible close
+  });
+</script>
+
+  <script>
+       $(document).ready(function(){
+    $('.carousel').carousel({
+         full_width: false,
+        indicators : false,
+
+
+    });
+     });
+  </script>
+  <script>
+ $('.carousel.carousel-slider').carousel({
+    fullWidth: false,
+    indicators: true
+  });
+  </script>
+  <script>
+   $('.carousel-slider').slider({
+    full_width: false,
+    indicators: true,
+     shift: 500
+  });
+
+  </script>
+
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

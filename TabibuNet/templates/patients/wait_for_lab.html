@@ -1,0 +1,117 @@
+{% extends 'tour/main.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Waiting for provider
+    {% endblock %}
+{% block body_block %}
+
+{% block content %}
+<h5 class="center" style=" margin-top: 1.5%; margin-bottom: 0.001%; font-family: 'Oswald',Bold; font-size: 40px; text-align: center; color: darkred">Waiting For Lab</h5>
+{% if visits %}
+   <h5>{{ total_visits }} Visit{{ total_visits|pluralize }}</h5>
+<table>
+<thead>
+<tr style="font-family: Oswald, bold; color: darkblue">
+    <th width="20">Visit Id</th>
+    <th width="50">Patient</th>
+    <th width="50">Start Date</th>
+
+
+    <th width="50">Status</th>
+    <th width="100"> Actions</th>
+
+
+</tr>
+
+</thead>
+<tbody>
+{% for visit in visits %}
+<tr>
+    <td width="10"><a href="{{ visit.get_absolute_url }}" > {{ visit.id|stringformat:"03d" }}</a></td>
+<td>{{ visit.patient.first_name|capfirst }} {{ visit.patient.last_name|capfirst }}</td>
+<td>{{ visit.start_date }}</td>
+
+{% if visit.status == 1 %}
+<td width="100">Reception</td>
+    {% elif visit.status == 2 %}
+    <td width="100">Waiting For Provider</td>
+        {% elif visit.status == 3 %}
+    <td width="100">Seeing Provider</td>
+        {% elif visit.status == 4 %}
+    <td width="100">Waiting For Dentist</td>
+        {% elif visit.status == 5 %}
+    <td width="100">Seeing Dentist</td>
+        {% elif visit.status == 6 %}
+    <td width="100">Waiting For Lab</td>
+        {% elif visit.status == 7 %}
+    <td width="100">Attending Lab</td>
+        {% elif visit.status == 8 %}
+    <td width="100">Waiting For Pharmacy</td>
+        {% elif visit.status == 9 %}
+    <td width="100">Attending Pharmacy</td>
+        {% elif visit.status == 10 %}
+    <td width="100">Billing</td>
+    {% elif visit.status == 11 %}
+    <td width="100">Close</td>
+    {% else %}
+    <td width="100">Out Of Range</td>
+        {% endif %}
+<td> <p style="font-family: Merriweather, serif; font-weight: bold; font-size: 18px; color: red; text-align: justify">
+<a href="{% url 'TabibuNet:provider' visit.id %}">Start Attending<i class="fa fa-edit " style="color:#002C3E" aria-hidden="true"></i></a>
+</p>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+{% else %}
+<h5 style="text-align: center">No one in line</h5>
+{% endif %}
+
+
+
+     {% if visits.has_other_pages %}
+    <ul class="pagination-pointed pagination text-center" role="navigation" aria-label="Pagination">
+    {% if visits.has_previous %}
+        <li class="pagination-previous"><a class="pagination-pointed-button" href="?page={{ visits.previous_page_number }}" >Previous <span class="show-for-sr">Page</span></a></li>
+        {% else %}
+  <li class="pagination-previous disabled">Previous <span class="show-for-sr">Page</span></li>
+        {% endif %}
+    {% for i in  visits.paginator.page_range %}
+    {% if visits.number == i %}
+  <li class="current"><span class="show-for-sr">You're on page</span> {{ i }}</li>
+        {% else %}
+  <li><a class="pagination-pointed-button" href="?page={{ i }}" aria-label="Page 2">{{ i }}</a></li>
+  {% endif %}
+    {% endfor %}
+    {% if visits.has_next %}
+  <li class="pagination-next"><a class="pagination-pointed-button" href="?page={{ visits.next_page_number }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+        {% endif %}
+</ul>
+    {% endif %}
+
+    {% if tag.name in tag %}
+        {% if object_list.has_other_pages %}
+    <ul class="pagination-pointed pagination text-center" role="navigation" aria-label="Pagination">
+    {% if object_list.has_previous %}
+        <li class="pagination-previous"><a class="pagination-pointed-button" href="?page={{ object_list.previous_page_number }}" >Previous <span class="show-for-sr">Page</span></a></li>
+        {% else %}
+  <li class="pagination-previous disabled">Previous <span class="show-for-sr">Page</span></li>
+        {% endif %}
+    {% for i in  object_list.paginator.page_range %}
+    {% if object_list.number == i %}
+  <li class="current"><span class="show-for-sr">You're on page</span> {{ i }}</li>
+        {% else %}
+  <li><a class="pagination-pointed-button" href="?page={{ i }}" aria-label="Page 2">{{ i }}</a></li>
+  {% endif %}
+    {% endfor %}
+    {% if object_list.has_next %}
+  <li class="pagination-next"><a class="pagination-pointed-button" href="?page={{ object_list.next_page_number }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+        {% endif %}
+</ul>
+    {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,241 @@
+{%load i18n staticfiles %}
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TabibuNet</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.0/css/foundation-flex.css">
+      <link href="{% static "css/foundation.css" %}" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="{% static "css/app.css" %}" rel="stylesheet">
+    <link href="{% static "fonts/slick.svg" %}" rel="stylesheet">
+	<link href="{% static "fonts/slick.eot" %}" rel="stylesheet">
+	<link href="{% static "fonts/slick.ttf" %}" rel="stylesheet">
+	<link href="{% static "fonts/slick.woff" %}" rel="stylesheet">
+	<link href="{% static "css/slick-theme.css" %}" rel="stylesheet">
+	<link href="{% static "css/" %}" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Chela+One|Coda+Caption:800|Fira+Sans|Gaegu|Hind|Knewave|Lato|Libre+Baskerville|Lora|Markazi+Text|Merienda|Merriweather|Montserrat|Noto+Sans|Noto+Serif|Open+Sans|Open+Sans+Condensed:300|Oswald|PT+Sans|PT+Sans+Narrow|Playfair+Display|Poppins|Raleway|Roboto|Roboto+Condensed|Roboto+Slab|Rubik|Slabo+27px|Source+Sans+Pro|Ubuntu" rel="stylesheet">
+  </head>
+  <body>
+  <div data-sticky-container>
+  <nav class="fixed top-bar topbar-responsive">
+  <div class="top-bar-title">
+    <span data-responsive-toggle="topbar-responsive" data-hide-for="medium">
+      <button class="menu-icon" type="button" data-toggle></button>
+    </span>
+    <a class="topbar-responsive-logo" style="font-family:'Ubuntu', Bold; font-size: 30px; color: red" href="#"><strong>TabibuNet</strong></a>
+  </div>
+  <div id="topbar-responsive" class="topbar-responsive-links">
+    <div class="top-bar-right">
+      <ul class="menu simple vertical medium-horizontal">
+            <li style="font-family:'Ubuntu', bold; font-size: 25px; color: white"> <a href="{% url 'TabibuNet:search_patient' %}">Search Patient</a></li>
+          <li style="font-family:'Ubuntu', bold; font-size: 25px; color: white"> <a href="{% url 'TabibuNet:patient_add' %}">Add Patient</a></li>
+           <li style="font-family:'Ubuntu', bold; font-size: 25px; color: white"> <a href="{% url 'TabibuNet:patient_list' %}">Patients</a></li>
+        <li style="font-family:'Ubuntu', bold; font-size: 25px; color: white"> <a href="{% url 'TabibuNet:visit_list' %}">Visit List</a></li>
+           <li style="font-family:'Ubuntu', bold; font-size: 25px; color: white"> <a href="{% url 'inpatient:admission_list' %}">Admission List</a></li>
+
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+</div>
+
+<div class="hero-section">
+<div class="hero-section-text">
+
+
+<h1 style="font-family:'Oswald', bold; font-size: 35px; color: #F7444E">Service To Human Is Service To God</h1>
+</div>
+</div>
+
+  <section  style="background-color: lightgrey">
+      <div class="grid-container">
+     <p style="font-family:'Lato', serif; font-size: 25px; color: black">
+         Our health is our biggest wealth
+     </p>
+      </div>
+  </section>
+    <section style="background-color: white">
+      <div class="grid-container">
+          <h2 class="article-row-section-header" style="font-family: Lato; color: deepskyblue">Our Mission</h2>
+     <p style="font-family:'Lato', serif; font-size: 25px; color: black">
+         To offer world class health care at affordable price
+     </p>
+      </div>
+  </section>
+
+<section style="background-color: lightgrey">
+<div class="article-row-section">
+  <div class="article-row-section-inner">
+  {% load news_tag %}
+    {% get_latest_news %}
+
+    <h2 class="article-row-section-header" style="font-family: Lato; color: deepskyblue">Tabibu News</h2>
+      {% for new in latest_news %}
+    <a href="{{ new.get_absolute_url }}">
+      <article class="article-row">
+        <div class="article-row-img">
+            {% if new.thumbnail %}
+          <img src="{{ new.thumbnail.url }}" alt="news" />
+            {% endif %}
+        </div>
+        <div class="article-row-content">
+          <h5 class="article-row-content-header" style="font-family: Roboto, Bold; font-size: 25px; color: blue">{{ new.title }}</h5>
+          <p class="article-row-content-description">{{ new.summary }}</p>
+        </div>
+      </article>
+    </a>
+      {% endfor %}
+  </div>
+</div>
+<div style="text-align:center ; font-family:'Lato', serif; font-size: 25px; color: red">
+<a href="{% url 'home:allnews' %}" class= "">View All News</a>
+</div>
+</section>
+<section style="background-color: white">
+
+  <div class="content">
+  <div class="wording">
+    {% load events_tags %}
+    {% get_latest_events %}
+<h2 style=" text-align:center; font-family:'Oswald', bold; font-size: 35px; color: deepskyblue">Upcoming Events</h2>
+</div>
+<div class="deals">
+    {% for new in latest_events %}
+<div class="card">
+    <a href="{{ new.url }}"><img src="{{ new.photo.url }}" /></a>
+  <div class="card-section">
+  <h5 style="font-family:'Ubuntu', serif; font-size: 35px; color: darkblue">{{ new.title }}</h5>
+      <p style="font-family:'Lato', serif; font-size: 25px; color: dimgrey"> {{ new.day }}</p>
+    <p style="font-family:'Lato', serif; font-size: 20px; color: red">Start: {{ new.start }}</p>
+      <p style="font-family:'Lato', serif; font-size: 20px; color: red">End: {{ new.end }}</p>
+  </div>
+</div>
+    {% endfor %}
+ </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+ <div id="engadget-footer-social-container">
+    <footer id="engadget-footer-social">
+        <div class="footer-left">
+		<h6 style="font-family:'Lato', serif; font-size: 20px; color: white"> Contact Us</h6>
+         <h6 style="font-family:'Lato', serif; font-size: 20px; color: white">Become a partner</h6>
+
+
+        </div>
+        <div class="footer-right">
+            <h6 style="font-family:'Lato', serif; font-size: 20px; color: white">Stay Connected</h6>
+            <i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-google-plus-square fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>
+        </div>
+    </footer>
+</div>
+
+
+
+
+    <script src="{% static 'js/vendor/jquery.js' %}"></script>
+    <script src="{% static 'js/vendor/what-input.js' %}"></script>
+    <script src="{% static 'js/vendor/foundation.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+  <script src="{% static 'js/' %}"></script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.multiple-items').slick({
+  infinite: true,
+  arrows:true,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  dots:false,
+       responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+
+});
+    });
+  </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('.deals').slick({
+  infinite: true,
+  arrows:true,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  dots:false,
+       responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+
+});
+    });
+  </script>
+  </body>
+</html>

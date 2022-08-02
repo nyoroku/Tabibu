@@ -1,0 +1,76 @@
+{% extends 'tour/main.html' %}
+{% load staticfiles %}
+{% block title_block %}
+ {{ new.title }}
+ {% endblock %}
+{% block body_block %}
+{% block content %}
+
+    <div class="content">
+    <div class="grid-x grid-margin-x">
+        <div class="cell large-8">
+<div class="flexible-article-images-container">
+  <div class="flexible-article-content">
+    <div class="flexible-article-image-full">
+      <div class="thumbnail">
+          {% if new.photo %}
+        <img src="{{ new.photo.url }}" alt="">
+          {% endif %}
+      </div>
+        <h5 style=" margin-left:10px; font-family:'Roboto', bold; font-size: 40px; color: darkblue">{{ new.title }}</h5>
+      <p class="caption" style=" margin-left:10px; font-family:'Open Sans', bold; font-size: 20px; color: black">{{ new.story }}</p>
+    </div>
+  </div>
+</div>
+          <section class="tag-cloud-section">
+          <h5 class="tag-cloud-title">Tags</h5>
+  <div class="tag-cloud">
+  <p>
+      {% for tag in new.tags.all %}
+    <a class="tag-cloud-individual-tag" href="{% url "home:allnews_by_tag" tag.slug %}">{{ tag.name }}</a>
+{% if not forloop.last %}, {% endif %}
+{% endfor %}
+  </p>
+  </div>
+</section>
+
+
+
+
+        </div>
+           <div class="cell large-4">
+      <div class="article-row-section">
+  <div class="article-row-section-inner">
+
+    <h2 class="article-row-section-header">Recent News</h2>
+      {% for new in similar_news %}
+    <a href="{{ new.get_absolute_url }}">
+      <article class="article-row">
+        <div class="article-row-img">
+            {% if new.thumbnail %}
+          <img src="{{ new.thumbnail.url }}" alt="news" />
+            {% endif %}
+        </div>
+        <div class="article-row-content">
+          <h5 class="article-row-content-header" style="font-family: Roboto, Bold; font-size: 25px; color: dimgrey">{{ new.title }}</h5>
+
+          <p class="article-row-content-description">{{ new.body|truncatewords:8 }}</p>
+
+
+
+
+
+        </div>
+      </article>
+    </a>
+      {% endfor %}
+
+  </div>
+
+</div>
+    </div>
+    </div>
+    </div>
+
+{% endblock %}
+{% endblock %}

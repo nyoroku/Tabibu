@@ -1,0 +1,123 @@
+{% extends "tour/main.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+     {% load humanize %}
+
+<div class="grid-container">
+<h5 class="author-title"><a href="{{ visit.get_absolute_url }}"> <button type="button" class="button hollow alert topbar-responsive-button">
+     <i class="fa fa-arrow-left " style="color:#002C3E" aria-hidden="true"></i>Back to visit details</button></a></h5>
+
+    {% if prescription %}
+   <table id="vertical">
+
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Actions</th>
+           <td><h5 class="author-title"><a href="#"> <button type="button" class="button hollow topbar-responsive-button">
+               Update  <i class="fa fa-edit-circle " style="color:#002C3E" aria-hidden="true"></i></button></a> <a href="{% url 'TabibuNet:prescription_update' prescription.id %}"> <button type="button" class="button hollow topbar-responsive-button">
+               Update Prescription <i class="fa fa-pencil-square " style="color:#002C3E" aria-hidden="true"></i></button></a>
+
+           </h5>
+
+           </td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Prescription ID</th>
+
+           <td>{{ prescription.id|stringformat:"03d" }}</td>
+       </tr>
+    <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Created</th>
+
+           <td>{{ prescription.visit.start_date }}</td>
+       </tr>
+ <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Patient</th>
+
+           <td>{{ prescription.visit.patient.first_name }} {{ prescription.visit.patient.last_name }}</td>
+       </tr>
+ <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Email</th>
+
+           <td>{{ prescription.visit.patient.email }}</td>
+       </tr>
+ <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Address</th>
+
+           <td>{{ prescription.visit.patient.address }}</td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Age</th>
+
+           <td>{{ prescription.visit.patient.age }}</td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Prescription Status</th>
+       {% if prescription.status == 1%}
+           <td><p>Undelivered</p></td>
+           {% elif prescription.status == 2%}
+           <td><p>Delivered</p></td>
+           {% else %}
+            <td><p>Out of range </p></td>
+           {% endif %}
+
+       </tr>
+
+
+   </table>
+
+
+
+
+    {% endif %}
+</div>
+
+
+
+
+
+    {% if medication %}
+    <section>
+    <div class="grid-container">
+
+
+   <h5>{{ medication.count }} Medication{{ medication|pluralize }}</h5>
+<table>
+<thead>
+<tr style="font-family: Oswald, bold; color: darkblue">
+    <th width="100">Medication</th>
+    <th width="100">Strength</th>
+    <th width="50">Instruction</th>
+    <th width="50">Refill</th>
+    <th width="50">Active</th>
+
+
+
+</tr>
+
+</thead>
+<tbody>
+{% for medicine in medication %}
+<tr>
+  <td width="100">{{ medicine.medication|capfirst }}</td>
+<td>{{ medicine.strength }}</td>
+<td>{{ medicine.instruction }}</td>
+    <td>{{ medicine.refill }}</td>
+ <td>{{ medicine.active }}</td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+
+
+
+    </div>
+</section>
+
+{% endif %}
+
+{% endblock %}
+

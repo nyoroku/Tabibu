@@ -1,0 +1,22 @@
+{% extends "tour/main.html" %}
+{% block title %}
+Edit "{{ visit.patient.first_name }}"
+{% endblock %}
+{% block content %}
+<h1>Edit "{{ visit.patient.first_name }}" Invoice</h1>
+<div class="grid-container">
+<h2>Invoice</h2>
+
+<form action="." method="post" enctype="multipart/form-data">
+    <table>
+{{ formset }}
+{{ formset.management_form }}
+    </table>
+{% csrf_token %}
+<input type="submit" class="button" value="Update Invoice">
+</form>
+
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'tour/main.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<div class="grid-container">
+<div class="tests" style="padding:20px;">
+<h1 style="padding:20px; font-family:'Ubuntu', serif; font-size: 30px; color: darkred; text-align: center">{{ ob.name|capfirst }}</h1>
+
+<h5 style="padding:20px; font-family:'Ubuntu', serif; font-size: 20px; color: darkblue">Examination</h5>
+
+<pre style=" font-family:'Lato', serif; font-size: 25px; color: black;white-space: pre-wrap;word-wrap: break-word; text-align: justify">
+{{ ob.examination }}
+</pre>
+
+<h5 style="padding:20px; font-family:'Ubuntu', serif; font-size: 20px; color: darkblue">Diagnosis</h5>
+<pre style=" font-family:'Lato', serif; font-size: 25px; color: black;white-space: pre-wrap;word-wrap: break-word; text-align: justify">
+{{ ob.diagnosis }}
+</pre>
+</div>
+</div>
+
+
+
+
+{% endblock %}

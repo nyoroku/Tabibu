@@ -1,0 +1,234 @@
+{% extends "tour/main.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+{% load tz %}
+<div class="grid-container">
+<h1 style="text-align: center; font-family: Oswald, bold; color: darkred; font-weight: bold">{{ visit.patient.first_name }}'s Visit</h1>
+    {% if visit %}
+   <table id="vertical">
+
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Actions</th>
+           <td><h5 class="author-title"><a href="{% url 'TabibuNet:add_test' visit.id %}"> <button type="button" class="button hollow topbar-responsive-button">
+               Update Investigation <i class="fa fa-edit-circle " style="color:#002C3E" aria-hidden="true"></i></button></a> <a href="{% url 'TabibuNet:prescription' visit.id %}"> <button type="button" class="button hollow topbar-responsive-button">
+           Prescription <i class="fa fa-edit-pen " style="color:#002C3E" aria-hidden="true"></i></button></a>
+
+
+               <a href="{% url 'TabibuNet:provider_to_lab' visit.id %}"> <button type="button" class="button hollow topbar-responsive-button">
+               Send To Lab <i class="fa fa-edit-circle " style="color:#002C3E" aria-hidden="true"></i></button></a>
+                <a href="{% url 'TabibuNet:provider_to_pharmacy' visit.id %}"> <button type="button" class="button hollow topbar-responsive-button">
+               Send To Pharmacy <i class="fa fa-edit-circle " style="color:#002C3E" aria-hidden="true"></i></button></a>
+              <a href="{% url 'billing:bill' visit.id %}"> <button type="button" class="button hollow topbar-responsive-button">
+               Billing <i class="fa fa-edit-circle " style="color:#002C3E" aria-hidden="true"></i></button></a>
+              <a href="{% url 'appointments:appointment_add' visit.id %}"> <button type="button" class="button hollow topbar-responsive-button">
+               Add Appointment <i class="fa fa-edit-circle " style="color:#002C3E" aria-hidden="true"></i></button></a>
+
+
+           </h5>
+
+           </td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Starting Time</th>
+           <td>{{ visit.start_date }}</td>
+       </tr>
+
+       <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Patient</th>
+           <td>{{ visit.patient.first_name|capfirst }} {{ visit.patient.last_name|capfirst }}</td>
+       </tr>
+
+        <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Status</th>
+           <td>{{ visit.status }}</td>
+       </tr>
+       <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Finishing Time</th>
+           <td>{{ visit.finish_date }}</td>
+       </tr>
+
+
+   </table>
+
+
+<table id="vertical">
+<tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Chief Complaints</th>
+           <td><p>{{ visit.chief_complaints|capfirst }} <a href="{% url 'TabibuNet:edit_visit' visit.id %}">
+           Update<i class="fa fa-pencil-square-o " style="color:#002C3E" aria-hidden="true"></i></a> </p></td>
+       </tr>
+</table>
+
+    {% endif %}
+</div>
+
+     {% if tests %}
+    <section >
+    <div class="grid-container">
+     <h1 style="text-align: center; font-family: Oswald, bold; color: darkred; font-weight: bold">{{ visit.patient.first_name|capfirst }}'s Investigations</h1>
+
+   <h5>{{ tests.count }} Investigation{{ tests|pluralize }}</h5>
+<table>
+<thead>
+<tr style="font-family: Oswald, bold; color: darkblue">
+    <th width="100">Investigation ID</th>
+</tr>
+</thead>
+<tbody>
+{% for test in tests %}
+<tr>
+    <td width="100"><a href="{{ test.get_absolute_url }}">{{ test.id|stringformat:"03d" }}</a></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+    </div>
+</section>
+
+
+    {% endif %}
+
+{% if labtests %}
+    <section >
+    <div class="grid-container">
+     <h1 style="text-align: center; font-family: Oswald, bold; color: darkred; font-weight: bold">{{ visit.patient.first_name|capfirst }}'s Lab Tests</h1>
+
+   <h5>{{ labtests.count }} Labtest{{ tests|pluralize }}</h5>
+<table>
+<thead>
+<tr style="font-family: Oswald, bold; color: darkblue">
+    <th width="100">Lab Test ID</th>
+      <th width="100">Test Name</th>
+</tr>
+</thead>
+<tbody>
+{% for test in labtests %}
+<tr>
+    <td width="100"><a href="{{ test.get_absolute_url }}">{{ test.id|stringformat:"03d" }}</a></td>
+<td>{{ test.medical_test.name }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+    </div>
+</section>
+
+
+    {% endif %}
+
+
+{% if medications %}
+    <section>
+    <div class="grid-container">
+    <h5 class="center" style=" margin-top: 1.5%; margin-bottom: 0.001%; font-family: 'Oswald',Bold; font-size: 40px; text-align: center; color: darkred">{{ visit.patient.first_name }}'s Prescription</h5>
+
+   <h5>{{ medications.count }} Medication{{ medications|pluralize }}</h5>
+<table>
+<thead>
+<tr style="font-family: Oswald, bold; color: darkblue">
+    <th width="100">Medication</th>
+    <th width="50">Strength</th>
+    <th width="50">Instructions</th>
+    <th width="50">Refill</th>
+    <th width="50">Active</th>
+
+
+</tr>
+
+</thead>
+<tbody>
+{% for medicine in medications %}
+<tr>
+  <td width="100">{{ medicine.medication }}</td>
+<td>{{ medicine.strength }}</td>
+<td>{{ medicine.instruction }}</td>
+<td>{{ medicine.refill }}</td>
+<td>{{ medicine.active }}</td>
+
+
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+
+
+
+    </div>
+</section>
+
+{% endif %}
+       {% if states %}
+    <section>
+    <div class="grid-container">
+     <h1 style="text-align: center; font-family: Oswald, bold; color: darkred; font-weight: bold">{{ visit.patient.first_name|capfirst }}'s Activities</h1>
+
+
+<table>
+<thead>
+<tr style="font-family: Oswald, bold; color: darkblue">
+    <th width="100">Activity</th>
+    <th width="50">Time</th>
+    <th width="50">End</th>
+    <th width="50">Duration</th>
+    <th width="50">User</th>
+
+
+
+</tr>
+
+</thead>
+<tbody>
+{% for log in states %}
+<tr>
+
+{% if log.state == '1' %}
+<td width="100">Reception</td>
+    {% elif log.state == '2' %}
+    <td width="100">Waiting For Provider</td>
+        {% elif log.state == '3' %}
+    <td width="100">Seeing Provider</td>
+        {% elif log.state == '4' %}
+    <td width="100">Waiting For Dentist</td>
+        {% elif log.state == '5' %}
+    <td width="100">Seeing Dentist</td>
+        {% elif log.state == '6' %}
+    <td width="100">Waiting For Lab</td>
+        {% elif log.state == '7' %}
+    <td width="100">Attending Lab</td>
+        {% elif log.state == '8' %}
+    <td width="100">Waiting For Pharmacy</td>
+        {% elif log.state == '9' %}
+    <td width="100">Attending Pharmacy</td>
+        {% elif log.state == '10' %}
+    <td width="100">Billing</td>
+    {% elif log.state == '11' %}
+    <td width="100">Ready To Close</td>
+    {% elif log.state == '12' %}
+    <td width="100">Closed</td>
+    {% else%}
+    <td width="100">{{ log.state }}</td>
+        {% endif %}
+<td>{{ log.timestamp|timezone:"Africa/Nairobi"  }}</td>
+<td>{{ log.get_next_by_timestamp.timestamp|timezone:"Africa/Nairobi"  }}</td>
+<td>{{ log.timestamp | timesince:log.get_next_by_timestamp.timestamp }}</td>
+<td>{{ log.by.first_name }} {{ log.by.last_name }}</td>
+
+
+
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+
+
+
+    </div>
+</section>
+
+
+    {% endif %}
+
+{% endblock %}
+

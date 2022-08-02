@@ -1,0 +1,108 @@
+{% extends 'tour/main.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    We Raise Manpower
+    {% endblock %}
+{% block body_block %}
+
+{% block content %}
+<h5 class="center" style=" margin-top: 1.5%; margin-bottom: 0.001%; font-family: 'Oswald',Bold; font-size: 40px">ALL NEWS</h5>
+{% if news %}
+
+{% if tag %}
+<h2>News tagged with "{{ tag.name }}"</h2>
+{% endif %}
+
+ <div class="contain">
+<div class="grid-x grid-margin-x">
+       {% for new in news %}
+        <div class="cell large-3">
+        <div class="news-card-tag">
+
+  <p class="tags">
+      Tags:
+      {% for tag in new.tags.all %}
+          <span class="label"><a href="{% url "home:allnews_by_tag" tag.slug %}">{{ tag.name }}</a>
+          </span>
+
+{% if not forloop.last %}, {% endif %}
+{% endfor %}
+</p>
+</div>
+
+<div class="card news-card">
+{% if new.photo %}
+    <img src="{{ new.photo.url }}">
+    {% endif %}
+  <div class="card-section">
+
+    <article class="news-card-article">
+      <h4 class="news-card-title"><a href="{{ new.get_absolute_url }}">{{ new.title }}</a></h4>
+      <p class="news-card-description">{{ new.body|truncatewords:10 }}</p>
+    </article>
+
+</div>
+
+
+</div>
+    </div>
+{% endfor %}
+
+</div>
+
+</div>
+
+
+
+{% else %}
+<p>No news yet</p>
+{% endif %}
+
+          <div class="pagi">
+          {% if news.has_other_pages %}
+<ul class="pagination-pointed pagination text-center" role="navigation" aria-label="Pagination">
+    {% if news.has_previous %}
+        <li class="pagination-previous"><a class="pagination-pointed-button" href="?page={{ news.previous_page_number }}" >Previous <span class="show-for-sr">Page</span></a></li>
+        {% else %}
+  <li class="pagination-previous disabled">Previous <span class="show-for-sr">Page</span></li>
+        {% endif %}
+    {% for i in  news.paginator.page_range %}
+    {% if news.number == i %}
+  <li class="current"><span class="show-for-sr">You're on page</span> {{ i }}</li>
+        {% else %}
+  <li><a class="pagination-pointed-button" href="?page={{ i }}" aria-label="Page 2">{{ i }}</a></li>
+  {% endif %}
+    {% endfor %}
+    {% if news.has_next %}
+  <li class="pagination-next"><a class="pagination-pointed-button" href="?page={{ news.next_page_number }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+        {% endif %}
+</ul>
+    {% endif %}
+          </div>
+
+
+
+    {% if tag.name in tag %}
+      {% if news.has_other_pages %}
+    <ul class="pagination-pointed pagination text-center" role="navigation" aria-label="Pagination">
+    {% if news.has_previous %}
+        <li class="pagination-previous"><a class="pagination-pointed-button" href="?page={{ news.previous_page_number }}" >Previous <span class="show-for-sr">Page</span></a></li>
+        {% else %}
+  <li class="pagination-previous disabled">Previous <span class="show-for-sr">Page</span></li>
+        {% endif %}
+    {% for i in  news.paginator.page_range %}
+    {% if news.number == i %}
+  <li class="current"><span class="show-for-sr">You're on page</span> {{ i }}</li>
+        {% else %}
+  <li><a class="pagination-pointed-button" href="?page={{ i }}" aria-label="Page 2">{{ i }}</a></li>
+  {% endif %}
+    {% endfor %}
+    {% if news.has_next %}
+  <li class="pagination-next"><a class="pagination-pointed-button" href="?page={{ news.next_page_number }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+        {% endif %}
+</ul>
+    {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% endblock %}

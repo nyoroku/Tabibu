@@ -1,0 +1,100 @@
+{% extends 'tour/main.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Properties
+    {% endblock %}
+{% block body_block %}
+
+{% block content %}
+<h5 class="center" style=" margin-top: 1.5%; margin-bottom: 0.001%; font-family: 'Oswald',Bold; font-size: 40px; text-align: center; color: darkred">Patient List</h5>
+{% if object_list %}
+   <h5>{{ object_list.count }} Patient{{ object_list|pluralize }}</h5>
+<table>
+<thead>
+<tr style="font-family: Oswald, bold; color: darkblue">
+    <th width="20">Id</th>
+    <th width="50">Name</th>
+    <th width="50">Phone</th>
+    <th width="50">Address</th>
+    <th width="50">Gender</th>
+    <th width="10">Email</th>
+    <th width="10">Location</th>
+    <th width="50">Actions</th>
+
+</tr>
+
+</thead>
+<tbody>
+{% for patient in object_list %}
+<tr>
+    <td width="100"><a href="{{ patient.get_absolute_url }}" > {{ patient.id|stringformat:"03d" }}</a></td>
+<td>{{ patient.first_name|capfirst }} {{ patient.last_name|capfirst }}</td>
+<td>{{ patient.phone }}</td>
+<td>{{ patient.address}}</td>
+<td>{{ patient.gender }}</td>
+<td width="10">{{  patient.email }}</td>
+<td width="10">{{ patient.location }}</td>
+<td> <p style="font-family: Merriweather, serif; font-weight: bold; font-size: 18px; color: red; text-align: justify">
+<a href="{% url 'TabibuNet:patient_edit' patient.id%}">Edit Patient Profile <i class="fa fa-edit " style="color:#002C3E" aria-hidden="true"></i></a>&#8226;
+
+    <a href="{% url 'TabibuNet:add_visit' patient.id %}">Add Visit<i class="fa fa-plus " style="color:#002C3E" aria-hidden="true"></i></a> &#8226;<a href="{% url 'inpatient:add_admission' patient.id %}">Add Admission<i class="fa fa-plus " style="color:#002C3E" aria-hidden="true"></i></a>
+</p></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+{% else %}
+<h5 style="text-align: center">Add Patient</h5>
+{% endif %}
+
+
+
+     {% if page_obj.has_other_pages %}
+    <ul class="pagination-pointed pagination text-center" role="navigation" aria-label="Pagination">
+    {% if page_obj.has_previous %}
+        <li class="pagination-previous"><a class="pagination-pointed-button" href="?page={{ page_obj.previous_page_number }}" >Previous <span class="show-for-sr">Page</span></a></li>
+        {% else %}
+  <li class="pagination-previous disabled">Previous <span class="show-for-sr">Page</span></li>
+        {% endif %}
+    {% for i in  page_obj.paginator.page_range %}
+    {% if page_obj.number == i %}
+  <li class="current"><span class="show-for-sr">You're on page</span> {{ i }}</li>
+        {% else %}
+  <li><a class="pagination-pointed-button" href="?page={{ i }}" aria-label="Page 2">{{ i }}</a></li>
+  {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+  <li class="pagination-next"><a class="pagination-pointed-button" href="?page={{ page_obj.next_page_number }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+        {% endif %}
+</ul>
+    {% endif %}
+    <div class="grid-container">
+    <a href="{% url 'TabibuNet:patient_add' %}" class="button expanded" style="text-align: center">
+    Add A New Patient
+    </a>
+    </div>
+    {% if tag.name in tag %}
+        {% if object_list.has_other_pages %}
+    <ul class="pagination-pointed pagination text-center" role="navigation" aria-label="Pagination">
+    {% if object_list.has_previous %}
+        <li class="pagination-previous"><a class="pagination-pointed-button" href="?page={{ object_list.previous_page_number }}" >Previous <span class="show-for-sr">Page</span></a></li>
+        {% else %}
+  <li class="pagination-previous disabled">Previous <span class="show-for-sr">Page</span></li>
+        {% endif %}
+    {% for i in  object_list.paginator.page_range %}
+    {% if object_list.number == i %}
+  <li class="current"><span class="show-for-sr">You're on page</span> {{ i }}</li>
+        {% else %}
+  <li><a class="pagination-pointed-button" href="?page={{ i }}" aria-label="Page 2">{{ i }}</a></li>
+  {% endif %}
+    {% endfor %}
+    {% if object_list.has_next %}
+  <li class="pagination-next"><a class="pagination-pointed-button" href="?page={{ object_list.next_page_number }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+        {% endif %}
+</ul>
+    {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% endblock %}

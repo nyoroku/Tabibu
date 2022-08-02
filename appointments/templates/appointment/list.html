@@ -1,0 +1,93 @@
+{% extends 'tour/main.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Appointments
+    {% endblock %}
+{% block body_block %}
+
+{% block content %}
+<h5 class="center" style=" margin-top: 1.5%; margin-bottom: 0.001%; font-family: 'Oswald',Bold; font-size: 40px; text-align: center; color: darkred">My  Appointment List</h5>
+{% if object_list %}
+   <h5>{{ object_list.count }} appointment{{ appointments|pluralize }}</h5>
+<table>
+<thead>
+<tr style="font-family: Oswald, bold; color: darkblue">
+    <th width="100">Name</th>
+    <th width="50">Date</th>
+    <th width="50">Start Time</th>
+    <th width="50">End Time</th>
+
+
+</tr>
+
+</thead>
+<tbody>
+{% for appointment in object_list %}
+<tr>
+    <td width="100"><a href="{{ appointment.visit.patient.get_absolute_url }}">{{ appointment.visit.patient.first_name }} {{ appointment.visit.patient.last_name }}</a></td>
+<td>{{ appointment.date }}</td>
+<td>{{ appointment.start_time }}</td>
+<td>{{ appointment.end_time}}</td>
+
+
+
+
+<td width="20"> <h5 style="font-family: Merriweather, serif; font-weight: bold; font-size: 15px; color: red; text-align: center">
+<a href="{% url 'appointments:delete' appointment.id %}">Delete <i class="fa fa-remove " style="color:#002C3E" aria-hidden="true"></i></a>&#8226;
+    <a href="{% url 'appointments:appointment_edit' appointment.id %}">Edit<i class="fa fa-image " style="color:#002C3E" aria-hidden="true"></i></a>
+</h5></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+{% else %}
+<h5 style="text-align: center">Add appointment</h5>
+{% endif %}
+
+
+
+     {% if page_obj.has_other_pages %}
+    <ul class="pagination-pointed pagination text-center" role="navigation" aria-label="Pagination">
+    {% if page_obj.has_previous %}
+        <li class="pagination-previous"><a class="pagination-pointed-button" href="?page={{ page_obj.previous_page_number }}" >Previous <span class="show-for-sr">Page</span></a></li>
+        {% else %}
+  <li class="pagination-previous disabled">Previous <span class="show-for-sr">Page</span></li>
+        {% endif %}
+    {% for i in  page_obj.paginator.page_range %}
+    {% if page_obj.number == i %}
+  <li class="current"><span class="show-for-sr">You're on page</span> {{ i }}</li>
+        {% else %}
+  <li><a class="pagination-pointed-button" href="?page={{ i }}" aria-label="Page 2">{{ i }}</a></li>
+  {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+  <li class="pagination-next"><a class="pagination-pointed-button" href="?page={{ page_obj.next_page_number }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+        {% endif %}
+</ul>
+    {% endif %}
+
+    {% if tag.name in tag %}
+        {% if object_list.has_other_pages %}
+    <ul class="pagination-pointed pagination text-center" role="navigation" aria-label="Pagination">
+    {% if object_list.has_previous %}
+        <li class="pagination-previous"><a class="pagination-pointed-button" href="?page={{ object_list.previous_page_number }}" >Previous <span class="show-for-sr">Page</span></a></li>
+        {% else %}
+  <li class="pagination-previous disabled">Previous <span class="show-for-sr">Page</span></li>
+        {% endif %}
+    {% for i in  object_list.paginator.page_range %}
+    {% if object_list.number == i %}
+  <li class="current"><span class="show-for-sr">You're on page</span> {{ i }}</li>
+        {% else %}
+  <li><a class="pagination-pointed-button" href="?page={{ i }}" aria-label="Page 2">{{ i }}</a></li>
+  {% endif %}
+    {% endfor %}
+    {% if object_list.has_next %}
+  <li class="pagination-next"><a class="pagination-pointed-button" href="?page={{ object_list.next_page_number }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+        {% endif %}
+</ul>
+    {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% endblock %}

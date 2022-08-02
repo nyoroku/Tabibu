@@ -1,0 +1,21 @@
+class CourseView(generic.ListView):
+    model = Course
+    context_object_name = 'courses'
+    queryset = Course.objects.all()
+    template_name = 'college/course.html'
+
+
+class CourseDetail(generic.DetailView):
+    model = Course
+    template_name = 'college/course_detail.html'
+
+
+def course_list(request):
+    courses = Course.objects.order_by('-date_created')
+    context = {'courses': courses}
+    return render(request, 'college/course.html', context)
+
+
+def detail(request, course_id):
+    course = get_object_or_404(Course, pk=course_id)
+    return render(request, 'college/course_detail.html', {'course': course})

@@ -1,0 +1,42 @@
+{% extends 'tour/main.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Who we are
+    {% endblock %}
+{% block body_block %}
+
+{% block content %}
+    <div class="grid-container">
+    <h2 style=" text-align:center; font-family:'Oswald', bold; font-size: 35px; color: deepskyblue">About Us</h2>
+    <p>We are Karira Nursing School charity group</p>
+    </div>
+    <section style="background-color: lightgrey">
+
+
+  <div class="content">
+  <div class="wording">
+    {% load team_tag %}
+    {% get_latest_team %}
+<h1 style=" text-align:center; font-family:'Oswald', bold; font-size: 35px; color: deepskyblue">Our Team</h1>
+</div>
+<div class="deals">
+    {% for member in latest_team %}
+<div class="card">
+{% if member.photo %}
+    <img src="{{ member.photo.url }}" />
+    {% endif %}
+  <div class="card-section">
+  <h5 style="font-family:'Ubuntu', serif; font-size: 25px; color: darkblue">{{ member.name }}</h5>
+      <p style="font-family:'Lato', serif; font-size: 20px; color: dimgrey"> {{ member.job }}</p>
+
+  </div>
+</div>
+    {% endfor %}
+ </div>
+  </div>
+
+</section>
+
+{% endblock %}
+
+{% endblock %}

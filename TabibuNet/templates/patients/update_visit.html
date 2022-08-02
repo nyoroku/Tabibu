@@ -1,0 +1,29 @@
+{% extends "tour/main.html" %}
+{% block title %}Visit Update{% endblock %}
+{% block content %}
+
+
+    <div class="grid-x" xmlns="http://www.w3.org/1999/html">
+        <div class="grid-container">
+    <form method="post" enctype="multipart/form-data">
+    <table>
+
+    <div class="cell small-6 large-12">
+
+
+    <h3>Update Chief Complaints</h3>
+
+   {% csrf_token %}
+
+        {{ visit_form.as_table }}
+
+
+</div>
+    </table>
+        <button type="submit" class="primary button expanded search-button">
+      Update Chief Complaints
+    </button>
+        </form>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "tour/main.html" %}
+{% block title %}Edit Patient's Medical Info{% endblock %}
+{% block content %}
+
+
+    <div class="grid-x" xmlns="http://www.w3.org/1999/html">
+        <div class="grid-container">
+    <form method="post" enctype="multipart/form-data">
+    <table>
+
+    <div class="cell small-6 large-12">
+
+
+    <h3>Edit Patient's Medical Info</h3>
+
+
+
+
+   {% csrf_token %}
+
+        {{ info_form.as_table }}
+
+
+</div>
+    </table>
+        <button type="submit" class="primary button expanded search-button">
+      Update Information
+    </button>
+        </form>
+    </div>
+    </div>
+{% endblock %}

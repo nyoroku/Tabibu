@@ -1,0 +1,135 @@
+{% extends "tour/main.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+     {% load humanize %}
+
+<div class="grid-container">
+<h5 class="author-title"><a href="{{ visit.get_absolute_url }}"> <button type="button" class="button hollow alert topbar-responsive-button">
+     <i class="fa fa-arrow-left " style="color:#002C3E" aria-hidden="true"></i>Back to visit details</button></a></h5>
+
+    {% if bill %}
+   <table id="vertical">
+
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Actions</th>
+           <td><h5 class="author-title"> <a href="{% url 'billing:invoice_update' bill.id %}"> <button type="button" class="button hollow topbar-responsive-button">
+               Update Invoice <i class="fa fa-pencil-square " style="color:#002C3E" aria-hidden="true"></i></button></a>
+<a href="{% url 'billing:confirm_payment' bill.id %}"> <button type="button" class="button hollow topbar-responsive-button">
+               Confirm Payment <i class="fa fa-edit-circle " style="color:#002C3E" aria-hidden="true"></i></button></a>
+           </h5>
+
+           </td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Bill ID</th>
+
+           <td>{{ bill.id|stringformat:"03d" }}</td>
+       </tr>
+    <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Created</th>
+
+           <td>{{ visit.start_date }}</td>
+       </tr>
+ <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Patient</th>
+
+           <td>{{ visit.patient.first_name }} {{ visit.patient.last_name }}</td>
+       </tr>
+ <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Email</th>
+
+           <td>{{ visit.patient.email }}</td>
+       </tr>
+ <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Address</th>
+
+           <td>{{ visit.patient.address }}</td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Payer</th>
+
+           <td>{{ visit.patient.insurance }}</td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Bill Status</th>
+       {% if bill.paid == False %}
+           <td><p>Unpaid</p></td>
+           {% else %}
+            <td><p>Paid </p></td>
+           {% endif %}
+
+       </tr>
+
+
+   </table>
+
+
+
+
+    {% endif %}
+</div>
+
+
+
+
+
+    {% if bill_item %}
+    <section>
+    <div class="grid-container">
+
+
+   <h5>{{ bill_item.count }} Item{{ bill_item|pluralize }}</h5>
+<table>
+<thead>
+<tr style="font-family: Oswald, bold; color: darkblue">
+    <th width="100">Item</th>
+    <th width="100">Unit Price</th>
+    <th width="50">Quantity</th>
+    <th width="50">Total Price</th>
+
+
+
+
+</tr>
+
+</thead>
+<tbody>
+{% for invoice in bill_item %}
+<tr>
+  <td width="100">{{ invoice.item.name|capfirst }}</td>
+<td>{{ invoice.item.price }}</td>
+<td>{{ invoice.quantity }}</td>
+    <td>{{ invoice.get_cost }}</td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+
+
+
+    </div>
+</section>
+        <div class="grid-container">
+        <section >
+        <table id="vertical" >
+
+
+   <tr style="background-color: dodgerblue">
+       <th style="font-family: Oswald ,bold; color: white">Total</th>
+
+       <td style="font-family: Oswald ,bold; color: white"><strong>Kshs {{ bill.total_items|intcomma }}</strong></td>
+       </tr>
+
+   </table>
+
+        </section>
+        </div>
+
+{% endif %}
+
+{% endblock %}
+

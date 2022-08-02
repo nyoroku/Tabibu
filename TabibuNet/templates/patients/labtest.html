@@ -1,0 +1,77 @@
+{% extends "tour/main.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+
+<div class="grid-container">
+
+    {% if labtest  %}
+   <table id="vertical">
+
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Actions</th>
+           <td><h5 class="author-title"><a href="{% url 'TabibuNet:edit_lab' labtest.id %}"> <button type="button" class="button hollow topbar-responsive-button">
+               Update Investigation <i class="fa fa-edit-circle " style="color:#002C3E" aria-hidden="true"></i></button></a> <a href="{% url 'TabibuNet:lab_to_provider' labtest.id %}"> <button type="button" class="button hollow topbar-responsive-button">
+           Send To Provider <i class="fa fa-edit-pen " style="color:#002C3E" aria-hidden="true"></i></button></a>
+
+
+
+              <a href="{% url 'TabibuNet:lab_to_pharmacy' labtest.id %}"> <button type="button" class="button hollow topbar-responsive-button">
+               Send To Pharmacy <i class="fa fa-edit-circle " style="color:#002C3E" aria-hidden="true"></i></button></a>
+             <a href="{% url 'TabibuNet:lab_to_close' labtest.id %}"> <button type="button" class="button hollow topbar-responsive-button">
+               Ready To Close <i class="fa fa-edit-circle " style="color:#002C3E" aria-hidden="true"></i></button></a>
+
+
+
+
+
+           </h5>
+
+           </td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Test Id</th>
+           <td>{{ labtest.id|stringformat:"03d" }}</td>
+       </tr>
+        <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Test Name</th>
+           <td>{{ labtest.medical_test.name }}</td>
+       </tr>
+
+       <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Patient</th>
+           <td>{{ labtest.visit.patient.first_name|capfirst }} {{ labtest.visit.patient.last_name|capfirst }}</td>
+       </tr>
+
+
+
+
+        <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Status</th>
+           <td>{{ labtest.status }}</td>
+       </tr>
+
+
+   </table>
+
+
+
+
+    {% endif %}
+<table id="vertical">
+<tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Examination</th>
+           <td><p>{{ labtest.examination }}  </p></td>
+       </tr>
+    <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Diagnosis</th>
+           <td><p>{{ labtest.diagnosis }}  </p></td>
+       </tr>
+</table>
+</div>
+
+
+
+
+
+{% endblock %}
+

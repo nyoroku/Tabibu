@@ -1,0 +1,40 @@
+{% extends "tour/main.html" %}
+{% block title %}
+{% if object %}
+Edit Appointment
+{% else %}
+Add Appointment
+{% endif %}
+{% endblock %}
+{% block content %}
+<h1 style="text-align: center">
+{% if object %}
+Edit Appointment
+{% else %}
+Add Appointment
+{% endif %}
+</h1>
+<div class="module">
+
+<form action="." method="post" id="vehicleForm" data-models-url="#" novalidate enctype="multipart/form-data">
+    <div class="grid-container">
+        <h2>Appointment info</h2>
+      <table style="background-color: grey">
+          {{ form.media }}
+          {{ form.media.js }}
+{{ form.as_table }}
+      </table>
+          <button type="submit" class="primary button expanded search-button">
+      Save Appointment
+    </button>
+
+
+    </div>
+{% csrf_token %}
+
+</form>
+
+</div>
+
+
+{% endblock %}

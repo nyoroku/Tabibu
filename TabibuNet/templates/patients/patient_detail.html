@@ -1,0 +1,229 @@
+{% extends "tour/main.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<div class="grid-container">
+<h1 style="text-align: center; font-family: Oswald, bold; color: darkred; font-weight: bold">Patient Profile</h1>
+    {% if patient %}
+   <table id="vertical">
+
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Actions</th>
+           <td><h5 class="author-title"><a href="{% url 'TabibuNet:patient_edit' patient.id %}"> <button type="button" class="button hollow topbar-responsive-button">
+           Edit Profile <i class="fa fa-edit " style="color:#002C3E" aria-hidden="true"></i></button></a></h5></td>
+       </tr>
+   <tr>
+       <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Patient-Picture</th>
+           <td>{% if patient.photo %}
+        <img class="avatar-image" src="{{ patient.photo.url }}" alt="profile picture">
+               {% endif %}
+           </td>
+       </tr>
+       <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Name</th>
+           <td>{{ patient.first_name|capfirst }} {{ patient.last_name|capfirst }}</td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Age</th>
+           <td>{{ patient.age }}</td>
+       </tr>
+    <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Phone</th>
+           <td>{{ patient.phone }}</td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Email</th>
+           <td>{{ patient.email }}</td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Location</th>
+           <td>{{ patient.location|capfirst }}</td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Address</th>
+           <td>{{ patient.address|capfirst }}</td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Contact Person</th>
+           <td>{{ patient.contact_person }}</td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Alcohol</th>
+           <td>{{ patient.drinker }}</td>
+
+    <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Smoker</th>
+           <td>{{ patient.smoker }}</td>
+       </tr>
+   </table>
+
+
+
+
+    {% endif %}
+</div>
+    <section>
+    <div class="grid-container">
+<h1 style="text-align: center; font-family: Oswald, bold; color: darkred; font-weight: bold">Medical Information</h1>
+    {% for information in info %}
+   <table id="vertical">
+
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Actions</th>
+           <td><h5 class="author-title"><a href="{% url 'TabibuNet:info_edit' patient.id %}"> <button type="button" class="button hollow topbar-responsive-button">
+           Edit Medical Info <i class="fa fa-edit " style="color:#002C3E" aria-hidden="true"></i></button></a></h5></td>
+       </tr>
+   <tr>
+       <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Blood Group</th>
+           <td>
+        {{ information.blood_type }}
+
+           </td>
+       </tr>
+       <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Blood Pressure</th>
+           <td>{{ information.blood_pressure }}</td>
+       </tr>
+    <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Height</th>
+           <td>{{ information.height }}</td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Weight</th>
+           <td>{{ information.weight}}</td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Chronic Diseases</th>
+           <td>{{ information.chronic_disease }}</td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Allergy</th>
+           <td>{{ information.allergy }}</td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Diabetes</th>
+           <td>{{ information.diabetes}}</td>
+       </tr>
+   <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Alzheimer</th>
+           <td>{{ information.alzheimer }}</td>
+   </tr>
+       <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Stroke</th>
+           <td>{{ information.stroke }}</td>
+
+       </tr>
+       <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Asthma</th>
+           <td>{{ information.asthma }}</td>
+
+       </tr>
+
+    <tr>
+         <th style="font-family: Oswald ,bold; color: darkblue">Comments</th>
+           <td>{{ information.comments }}</td>
+       </tr>
+   </table>
+
+
+
+
+    {% endfor %}
+</div>
+    </section>
+{%  if visits %}
+    <section style="background-color: cornflowerblue">
+    <h1 style="text-align: center; font-family: Oswald, bold; color: darkred; font-weight: bold">{{ patient.first_name|capfirst }}'s Visits</h1>
+
+
+   <div class="content">
+<div class="wording">
+
+
+</div>
+
+<table>
+<thead>
+<tr style="font-family: Oswald, bold; color: darkblue">
+    <th width="20">Visit Id</th>
+
+    <th width="50">Start Date</th>
+    <th width="50">Finish Date</th>
+
+    <th width="50">Status</th>
+
+
+</tr>
+
+</thead>
+<tbody>
+{% for visit in visits %}
+<tr>
+    <td width="10"><a href="{{ visit.get_absolute_url }}" > {{ visit.id|stringformat:"03d" }}</a></td>
+
+<td>{{ visit.start_date }}</td>
+<td>{{ visit.finish_date}}</td>
+
+<td width="100">{{  visit.status|capfirst }}</td>
+
+
+</tr>
+{% endfor %}
+</tbody>
+</table>
+    </div>
+
+
+
+    </section>
+    {% endif %}
+    {%  if admissions %}
+    <section style="background-color: darkgrey">
+    <h1 style="text-align: center; font-family: Oswald, bold; color: darkred; font-weight: bold">{{ patient.first_name|capfirst }}'s Admissions</h1>
+
+
+   <div class="content">
+<div class="wording">
+
+
+</div>
+<table>
+<thead>
+<tr style="font-family: Oswald, bold; color: darkblue">
+    <th width="20">Admission Id</th>
+
+    <th width="50">Admission Date</th>
+    <th width="50">Discharge Date</th>
+
+    <th width="50">Status</th>
+
+
+</tr>
+
+</thead>
+<tbody>
+{% for admission in admissions %}
+<tr>
+    <td width="10"><a href="{{ admission.get_absolute_url }}" > {{ admission.id|stringformat:"03d" }}</a></td>
+
+<td>{{ admission.admission_date }}</td>
+<td>{{ admission.discharge_date}}</td>
+
+<td width="100">{{  admission.status|capfirst }}</td>
+
+
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+    </div>
+
+
+
+    </section>
+
+   {% endif %}
+{% endblock %}
+<br>
